@@ -1,0 +1,68 @@
+#include <iostream>
+#include <stack>
+#include <string>
+#include <cctype>
+
+using namespace std;
+
+// Function to evaluate postfix expression
+int evaluatePostfix(string postfix) {
+    stack<int> operands;
+
+    for (char ch : postfix) {
+        if (isspace(ch)) {
+            continue;
+        } else if (isdigit(ch)) {
+            operands.push(ch - '0'); // Convert char to int
+        } else {
+            int operand2 = operands.top();
+            operands.pop();
+            int operand1 = operands.top();
+            operands.pop();
+
+            switch (ch) {
+                case '+':
+                    operands.push(operand1 + operand2);
+                    break;
+                case '-':
+                    operands.push(operand1 - operand2);
+                    break;
+                case '*':
+                    operands.push(operand1 * operand2);
+                    break;
+                case '/':
+                    if (operand2 == 0) {
+                        throw invalid_argument("Division by zero");
+                    }
+                    operands.push(operand1 / operand2);
+                    break;
+                default:
+                    throw invalid_argument("Invalid operator");
+            }
+        }
+    }
+
+    if (operands.size() != 1) {
+        throw invalid_argument("Invalid postfix expression");
+    }
+
+    return operands.top();
+}
+
+int main() {
+    string postfixExpression;
+
+    // Input postfix expression
+    cout << "Enter the postfix expression: ";
+    getline(cin, postfixExpression);
+
+    // Evaluate postfix expression
+    try {
+        int result = evaluatePostfix(postfixExpression);
+        cout << "Result of the postfix expression: " << result << endl;
+    } catch (const exception& e) {
+        cerr << "Error: " << e.what() << endl;
+    }
+
+    return 0;
+}
