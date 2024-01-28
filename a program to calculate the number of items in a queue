@@ -1,0 +1,24 @@
+#include <iostream>
+#include <queue>
+
+using namespace std;
+
+int main() {
+    // Create a queue of integers
+    queue<int> myQueue;
+
+    // Insert elements into the queue
+    myQueue.push(10);
+    myQueue.push(20);
+    myQueue.push(30);
+    myQueue.push(40);
+    myQueue.push(50);
+
+    // Calculate the number of items in the queue
+    int itemCount = myQueue.size();
+
+    // Output the number of items in the queue
+    cout << "Number of items in the queue: " << itemCount << endl;
+
+    return 0;
+}
