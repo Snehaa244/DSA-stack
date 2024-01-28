@@ -1,0 +1,23 @@
+#include<stdio.h>
+long factorial(int num);
+int main(void)
+{
+int n;
+printf("Enter a number: ");
+scanf("%d", &n);
+printf("%d! = %ld", n,
+factorial(n));
+return 0;
+}
+long factorial(int num)
+{
+if(num == 0)
+{
+return 1;
+}
+else
+{
+// recursive call
+return num * factorial(num - 1);
+}
+}
